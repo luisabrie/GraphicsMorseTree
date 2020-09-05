@@ -7,44 +7,36 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+
 
 
 public class MorseBinaryTree {
     private Node root = new Node('∫');    
-    
-    private class Node{
-        private Character caracter;
-        private Node left;
-        private Node right;
-
-        private Node() {
-           
-        }
-        private Node(Character caracter) {
-           this.caracter = caracter;
-        }
-    }
+    private HashMap<Character,String> hmap = new HashMap<>();
     
     private void add(Character element, String morseRepresentation){
         Node now = root;
         int i = 0;
         Character letter;
+        hmap.put(element, morseRepresentation);
         while (i < morseRepresentation.length()){
             letter = morseRepresentation.charAt(i);
             switch(letter){
                 case '.':
-                    if (now.left != null)
-                    now = now.left;
+                    if (now.getLeft() != null)
+                        now = now.getLeft();
                     else {
-                        now.left = new Node();
-                        now = now.left;
+                        now.setLeft(new Node());
+                        now = now.getLeft();
                     }
                     break;
                 case '_':
-                    if (now.right != null) now = now.right;
+                    if (now.getRight() != null) 
+                        now = now.getRight();
                     else {
-                        now.right = new Node();
-                        now = now.right;
+                        now.setRight(new Node());
+                        now = now.getRight();
                     }
                     break;
                 default:
@@ -52,9 +44,36 @@ public class MorseBinaryTree {
             }
             i = i +2;
         }
-        now.caracter = element;
+        now.setCaracter(element);
+    }
+    public String lookFor(Character elemento){
+        String morseRepresentation = hmap.get(elemento);
+        return morseRepresentation;
+    }   
+    /*
+    public Character follow(String morseRepresentation){
+        if (morseRepresentation != null)
+            return follow(morseRepresentation, root,0);
+        else 
+            return null;
     }
     
+    private Character follow(String morseRepresentation, Node n, int pos){
+        if (pos < morseRepresentation.length()){
+            System.out.println(morseRepresentation.charAt(pos));
+            switch(morseRepresentation.charAt(pos)){
+                case '.':
+                    return follow(morseRepresentation,n.getLeft(),pos+2);
+                case '_':
+                    return follow(morseRepresentation,n.getRight(),pos+2);
+            }
+        }
+        else {
+            return n.getCaracter();
+        }
+        return null;
+    }
+*/
     public void generateTreeFromFile(){
         ClassLoader classLoader = getClass().getClassLoader();
         
@@ -85,10 +104,14 @@ public class MorseBinaryTree {
         }
     private void preOrden(Node n){
         if (n!=null){
-            System.out.println(n.caracter);
-            preOrden(n.left);
-            preOrden(n.right);
+            System.out.println(n.getCaracter());
+            preOrden(n.getLeft());
+            preOrden(n.getRight());
         }
+    }
+
+    public Node getRoot() {
+        return root;
     }
     
     

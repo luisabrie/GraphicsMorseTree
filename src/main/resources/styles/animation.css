@@ -1,0 +1,20 @@
+.root {
+    -fx-font-family: "System";
+    -fx-font-size: 1em;
+    -fx-base: #81B29A;
+    -fx-background: #39393A;
+    -fx-focus-color: #7C7C7C;
+    -fx-control-inner-background: #81B29A;
+    -fx-text-base-color: #2b2c2b;
+    -fx-text-background-color: #F9F9F9;
+    -fx-text-inner-color: #FCFCFC;
+}
+.text-field {
+    -fx-prompt-text-fill: derive(-fx-text-base-color, -20%);
+}
+
+.button, .toggle-button, .choice-box {
+
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-padding: 3px 10px 3px 10px;
+}

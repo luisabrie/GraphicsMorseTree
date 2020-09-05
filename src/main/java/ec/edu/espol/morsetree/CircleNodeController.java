@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author mbpretina
  */
-public class MainAppPanelController implements Initializable {
+public class CircleNodeController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -24,4 +24,4 @@ public class MainAppPanelController implements Initializable {
         // TODO
     }    
     
-}
+}   
