@@ -23,7 +23,7 @@ public class MorseBinaryTree {
         while (i < morseRepresentation.length()){
             letter = morseRepresentation.charAt(i);
             switch(letter){
-                case '.':
+                case '_':
                     if (now.getLeft() != null)
                         now = now.getLeft();
                     else {
@@ -31,7 +31,7 @@ public class MorseBinaryTree {
                         now = now.getLeft();
                     }
                     break;
-                case '_':
+                case '.':
                     if (now.getRight() != null) 
                         now = now.getRight();
                     else {
@@ -50,30 +50,7 @@ public class MorseBinaryTree {
         String morseRepresentation = hmap.get(elemento);
         return morseRepresentation;
     }   
-    /*
-    public Character follow(String morseRepresentation){
-        if (morseRepresentation != null)
-            return follow(morseRepresentation, root,0);
-        else 
-            return null;
-    }
     
-    private Character follow(String morseRepresentation, Node n, int pos){
-        if (pos < morseRepresentation.length()){
-            System.out.println(morseRepresentation.charAt(pos));
-            switch(morseRepresentation.charAt(pos)){
-                case '.':
-                    return follow(morseRepresentation,n.getLeft(),pos+2);
-                case '_':
-                    return follow(morseRepresentation,n.getRight(),pos+2);
-            }
-        }
-        else {
-            return n.getCaracter();
-        }
-        return null;
-    }
-*/
     public void generateTreeFromFile(){
         ClassLoader classLoader = getClass().getClassLoader();
         

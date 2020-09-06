@@ -74,18 +74,18 @@ public class MBTView extends Pane{
             System.out.print(n.getCaracter());
             System.out.println(morseRepresentation.charAt(pos));
             switch(morseRepresentation.charAt(pos)){
-                case '.':
+                case '_':
                     n.getLeft().getTni().focusNode();
                     n.getLeft().getTni().focusPath();
-                    SoundUtils.tone(500,300);
+                    SoundUtils.tone(500,900);
                     n.getLeft().getTni().traversed();
                     followGraphically(morseRepresentation,n.getLeft(),pos+2);
                     n.getLeft().getTni().resetColor();
                     break;
-                case '_':
+                case '.':
                     n.getRight().getTni().focusNode();
                     n.getRight().getTni().focusPath();
-                    SoundUtils.tone(500,900);
+                    SoundUtils.tone(500,300);
                     n.getRight().getTni().traversed();
                     followGraphically(morseRepresentation,n.getRight(),pos+2);
                     n.getRight().getTni().resetColor();

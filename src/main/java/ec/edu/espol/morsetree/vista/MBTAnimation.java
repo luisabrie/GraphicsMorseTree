@@ -50,7 +50,15 @@ public class MBTAnimation extends Application{
                     for (char ch: newValue.toCharArray()) {
                         executorService.submit(new Runnable() {
                             public void run() {
-                                view.followGraphically(Character.toUpperCase(ch));
+                                if(ch!=' '){
+                                    view.followGraphically(Character.toUpperCase(ch));
+                                }else{
+                                    try {
+                                        Thread.sleep(1500);
+                                    } catch (InterruptedException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                }
                             }
                         });
                     }
