@@ -18,3 +18,12 @@
     -fx-background-radius: 5, 5, 4, 3;
     -fx-padding: 3px 10px 3px 10px;
 }
+
+.icon-label > .text {
+    -fx-fill: -fx-control-inner-background;
+}
+
+.icon-label > .glyph-icon {
+    -fx-fill: -fx-control-inner-background;
+}
+

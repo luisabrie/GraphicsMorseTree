@@ -19,19 +19,15 @@ public class TreeNodeItem extends StackPane {
     private final Circle circle;
     private Line line;
     private final Text text;
-    private double x;
-    private double y;
-    final private double radius = 15;
+    private static final double RADIUS = 15;
     
     public TreeNodeItem(Character c,double x,double y){
-        this.x = x;
-        this.y = y;
-        this.circle = new Circle(radius);
+        this.circle = new Circle(RADIUS);
         this.text = new Text(c.toString());
         circle.setFill(Color.web("#85FFC7"));
         circle.setStroke(Color.BLACK);
-        setTranslateX(x-radius);
-        setTranslateY(y-radius);
+        setTranslateX(x-RADIUS);
+        setTranslateY(y-RADIUS);
                 
         getChildren().addAll(circle, text);
     }
@@ -56,17 +52,9 @@ public class TreeNodeItem extends StackPane {
     }
     public void resetColor(){
         if (circle!=null)
-        circle.setFill(Color.web("#85FFC7"));
+            circle.setFill(Color.web("#85FFC7"));
         if (line!=null)
-        line.setStroke(Color.web("#E6E6E6"));
-        
+            line.setStroke(Color.web("#E6E6E6"));  
     }
-    /*
-    void createLine(double hGap, double vGap) {
-        line = new Line(x - hGap, y + vGap, x, y);
-        line.setStroke(Color.web("#E6E6E6"));
-        getChildren().add(line);
-    }
-    */
     
 }

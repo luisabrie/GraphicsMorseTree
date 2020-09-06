@@ -4,12 +4,18 @@ package ec.edu.espol.morsetree.util;
 /**
  * Autor : Réal Gagnon
  */
+
+import ec.edu.espol.morsetree.model.NotificationLabel;
 import javax.sound.sampled.*;
 
 public class SoundUtils {
 
-  public static float SAMPLE_RATE = 8000f;
+    private SoundUtils() {
+    }
+    
+  public static final float SAMPLERATE = 8000f;
 
+  
   public static void tone(int hz, int msecs) 
       
   {
@@ -24,24 +30,24 @@ public class SoundUtils {
           byte[] buf = new byte[1];
           AudioFormat af =
                   new AudioFormat(
-                          SAMPLE_RATE, // sampleRate
+                          SAMPLERATE, // sampleRate
                           8,           // sampleSizeInBits
                           1,           // channels
                           true,        // signed
                           false);      // bigEndian
-          SourceDataLine sdl = AudioSystem.getSourceDataLine(af);
-          sdl.open(af);
-          sdl.start();
-          for (int i=0; i < msecs*8; i++) {
-              double angle = i / (SAMPLE_RATE / hz) * 2.0 * Math.PI;
-              buf[0] = (byte)(Math.sin(angle) * 127.0 * vol);
-              sdl.write(buf,0,1);
+          try (SourceDataLine sdl = AudioSystem.getSourceDataLine(af)) {
+              sdl.open(af);
+              sdl.start();
+              for (int i=0; i < msecs*8; i++) {
+                  double angle = i / (SAMPLERATE / hz) * 2.0 * Math.PI;
+                  buf[0] = (byte)(Math.sin(angle) * 127.0 * vol);
+                  sdl.write(buf,0,1);
+              }
+              sdl.drain();
+              sdl.stop();
           }
-          sdl.drain();
-          sdl.stop();
-          sdl.close();
       } catch (LineUnavailableException ex) {
-          ex.printStackTrace();
+          NotificationLabel.getInstance().send(ex.getMessage());
       }
       
   }

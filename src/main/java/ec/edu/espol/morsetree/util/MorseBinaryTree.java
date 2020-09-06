@@ -1,6 +1,7 @@
 
 package ec.edu.espol.morsetree.util;
 
+import ec.edu.espol.morsetree.model.NotificationLabel;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +16,14 @@ public class MorseBinaryTree {
     private Node root = new Node('∫');    
     private HashMap<Character,String> hmap = new HashMap<>();
     
+    public double height (){
+        return height(root);
+    }
+    private double height (Node n){
+        if (n == null)
+            return 0;
+        return 1.00+ Math.max(height(n.getLeft()), height(n.getRight()));
+    }
     private void add(Character element, String morseRepresentation){
         Node now = root;
         int i = 0;
@@ -40,17 +49,15 @@ public class MorseBinaryTree {
                     }
                     break;
                 default:
-                    System.out.println("A ocurrido un error, no se encontró accion para : "+letter);
+                    NotificationLabel.getInstance().send("A ocurrido un error, no se encontró accion para : "+letter);
             }
             i = i +2;
         }
         now.setCaracter(element);
     }
     public String lookFor(Character elemento){
-        String morseRepresentation = hmap.get(elemento);
-        return morseRepresentation;
+        return hmap.get(elemento);
     }   
-    
     public void generateTreeFromFile(){
         ClassLoader classLoader = getClass().getClassLoader();
         
@@ -69,24 +76,12 @@ public class MorseBinaryTree {
                 }
             }
         }   catch (FileNotFoundException ex) {
-                System.out.println("File not found: "+ ex.getMessage());
+                NotificationLabel.getInstance().send("File not found: "+ ex.getMessage());
             } catch (IOException ex) {
-                System.out.println("An error has ocurred: "+ ex.getMessage());
+                NotificationLabel.getInstance().send("An error has ocurred: "+ ex.getMessage());
             }
         }
     }
-
-    public void preOrden(){
-            preOrden(root);
-        }
-    private void preOrden(Node n){
-        if (n!=null){
-            System.out.println(n.getCaracter());
-            preOrden(n.getLeft());
-            preOrden(n.getRight());
-        }
-    }
-
     public Node getRoot() {
         return root;
     }
